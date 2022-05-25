@@ -1,0 +1,1 @@
+<img src="majoo_logo.png" alt="majoo_logo" width="120" height="120">
