@@ -84,8 +84,9 @@ class SupplierController extends Controller
      */
     public function edit(Supplier $supplier)
     {
-        $post = Supplier::findOrFail($supplier);
-        return view('master.supplier.create', compact('post'));
+        return view('master.supplier.edit', [
+            'data' => $supplier
+        ]);
     }
 
     /**
@@ -95,23 +96,21 @@ class SupplierController extends Controller
      * @param  \App\Models\Supplier  $supplier
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Supplier $supplier)
     {
-        $this->validate($request, [
-            'nama' => 'required',
-            'alamat' => 'required',
-            'telp' => 'required'
-        ]);
 
-        $post = Supplier::findOrFail($id);
+        $post = $request->validate(
+            [
+                'nama' => 'required',
+                'alamat' => 'required',
+                'telp' => 'required'
+            ]
+        );
 
-        $post->update([
-            'nama' => $request->nama,
-            'alamt' => $request->alamat,
-            'telp' => $request->telp,
-        ]);
+        $flag = Supplier::where('id', $supplier->id)
+            ->update($post);
 
-        if ($post) {
+        if ($flag) {
             return redirect()
                 ->to('master/supplier')
                 ->with([
@@ -133,23 +132,9 @@ class SupplierController extends Controller
      * @param  \App\Models\Supplier  $supplier
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Supplier $supplier)
     {
-        $post = Supplier::findOrFail($id);
-        $post->delete();
-
-        if ($post) {
-            return redirect()
-                ->to('master/supplier')
-                ->with([
-                    'success' => 'Supplier has been deleted successfully'
-                ]);
-        } else {
-            return redirect()
-                ->to('master/supplier')
-                ->with([
-                    'error' => 'Some problem has occurred, please try again'
-                ]);
-        }
+        Supplier::destroy($supplier->id);
+        return redirect('/master/supplier')->with('success', 'Data Berhasil dihapus');
     }
 }

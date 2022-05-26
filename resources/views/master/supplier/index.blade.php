@@ -3,6 +3,11 @@
 @section('container')
     <div class="mt-4">
 
+        @if (session()->has('success'))
+            <div class="alert alert-success" role="alert">
+                {{ session('success') }}
+            </div>
+        @endif
         <a href="/master/supplier/create" class="btn btn-md btn-success mb-3 float-right">New
             Supplier</a>
         <div class="table-responsive">
@@ -24,11 +29,11 @@
                             <td>{{ $d->alamat }}</td>
                             <td>{{ $d->telp }}</td>
                             <td class="text-left">
+                                <a href="/master/supplier/{{ $d->id }}/edit" class="btn btn-sm btn-primary">EDIT</a>
                                 <form onsubmit="return confirm('Apakah Anda Yakin ?');"
-                                    action="/master/supplier/{{ $d->id }}" method="POST">
-                                    <a href="/master/supplier/{{ $d->id }}" class="btn btn-sm btn-primary">EDIT</a>
-                                    @csrf
+                                    action="/master/supplier/{{ $d->id }}" method="POST" class="d-inline">
                                     @method('DELETE')
+                                    @csrf
                                     <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
                                 </form>
                             </td>
