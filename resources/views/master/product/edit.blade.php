@@ -2,7 +2,7 @@
 
 @section('container')
     <div class="container mt-5 mb-5">
-        <h2>Edit Supplier</h2>
+        <h2>Edit Produk</h2>
         <div class="row">
             <div class="col-md-12">
 
@@ -22,7 +22,7 @@
                 <div class="card border-0 shadow rounded">
                     <div class="card-body">
 
-                        <form action="/master/supplier/{{ $data->id }}" method="POST">
+                        <form action="/master/product/{{ $data->id }}" method="POST">
                             @method('put')
                             @csrf
 
@@ -64,7 +64,7 @@
                             </div>
                             <div class="mt-3">
                                 <button type="submit" class="btn btn-md btn-primary">Simpan</button>
-                                <a href="/master/supplier" class="btn btn-md btn-secondary">Kembali</a>
+                                <a href="/master/product" class="btn btn-md btn-secondary">Kembali</a>
                             </div>
 
                         </form>
