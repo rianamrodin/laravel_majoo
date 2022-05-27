@@ -59,4 +59,8 @@
             </div>
         </form>
     </x-auth-card>
+    <div style="text-align:center;margin:13px;">
+        <span>Dont Have Account ? <a href="register" class="text-muted">Register Here !</a>
+        </span>
+    </div>
 </x-guest-layout>
