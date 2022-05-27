@@ -19,7 +19,6 @@
                         <th scope="col">Harga</th>
                         <th scope="col">Gambar</th>
                         <th scope="col">Deskripsi</th>
-                        <th scope="col"></th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -28,7 +27,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $d->nama }}</td>
-                            <td>{{ $d->nama }}</td>
+                            <td>{{ $d->id_category }}</td>
                             <td>{{ $d->harga }}</td>
                             <td>{{ $d->gambar }}</td>
                             <td>{{ $d->deskripsi }}</td>

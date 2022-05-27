@@ -29,4 +29,4 @@ Route::resource('/master/supplier', SupplierController::class)->middleware('auth
 Route::resource('/master/user', UserController::class)->middleware('auth');
 Route::resource('/master/pelanggan', PelangganController::class)->middleware('auth');
 Route::resource('/master/product', ProductController::class)->middleware('auth');
-Route::resource('/master/productcat', ProductCategoryController::class)->middleware('auth');
+Route::resource('/master/productcategories', ProductCategoryController::class)->middleware('auth');

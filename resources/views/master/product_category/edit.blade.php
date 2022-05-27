@@ -19,10 +19,10 @@
                     </div>
                 @endif
 
-                <div class="card border-0 shadow rounded">
+                <div class="card border-1 rounded">
                     <div class="card-body">
 
-                        <form action="/master/productcat/{{ $data->id }}" method="POST">
+                        <form action="/master/productcategories/{{ $data->id }}" method="POST">
                             @method('put')
                             @csrf
 
@@ -41,7 +41,7 @@
 
                             <div class="mt-3">
                                 <button type="submit" class="btn btn-md btn-primary">Simpan</button>
-                                <a href="/master/productcat" class="btn btn-md btn-secondary">Kembali</a>
+                                <a href="/master/productcategories" class="btn btn-md btn-secondary">Kembali</a>
                             </div>
 
                         </form>

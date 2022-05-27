@@ -24,9 +24,11 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $d->nama }}</td>
                             <td class="text-left">
-                                <a href="/master/productcat/{{ $d->id }}/edit" class="btn btn-sm btn-primary">EDIT</a>
+                                <a href="/master/productcategories/{{ $d->id }}/edit"
+                                    class="btn btn-sm btn-primary">EDIT</a>
                                 <form onsubmit="return confirm('Apakah Anda Yakin ?');"
-                                    action="/master/productcat/{{ $d->id }}" method="POST" class="d-inline">
+                                    action="/master/productcategories/{{ $d->id }}" method="POST"
+                                    class="d-inline">
                                     @method('DELETE')
                                     @csrf
                                     <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>

@@ -40,6 +40,7 @@ class ProductController extends Controller
         $this->validate($request, [
             'nama' => 'required|unique:products',
             'harga' => 'required',
+            'gambar' => 'gambar|file|max:1024'
         ]);
 
         $data = Product::create([
@@ -85,7 +86,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('master.supplier.edit', [
+        return view('master.product.edit', [
             'data' => $product
         ]);
     }

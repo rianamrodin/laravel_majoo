@@ -2,7 +2,7 @@
 
 @section('container')
     <div class="container mt-5 mb-5">
-        <h2>Edit Supplier</h2>
+        <h2>Edit Pelanggan</h2>
         <div class="row">
             <div class="col-md-12">
 
@@ -19,7 +19,7 @@
                     </div>
                 @endif
 
-                <div class="card border-0 shadow rounded">
+                <div class="card border-1 rounded">
                     <div class="card-body">
 
                         <form action="/master/supplier/{{ $data->id }}" method="POST">

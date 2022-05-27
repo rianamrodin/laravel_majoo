@@ -15,7 +15,7 @@ class PelangganController extends Controller
      */
     public function index()
     {
-        //
+        return view('master.pelanggan.index', ['data' => Pelanggan::all()]);
     }
 
     /**
@@ -25,7 +25,7 @@ class PelangganController extends Controller
      */
     public function create()
     {
-        //
+        return view('master.pelanggan.create');
     }
 
     /**

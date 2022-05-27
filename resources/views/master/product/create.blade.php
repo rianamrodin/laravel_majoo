@@ -19,13 +19,13 @@
                     </div>
                 @endif
 
-                <div class="card border-0 shadow rounded">
+                <div class="card border-1 rounded">
                     <div class="card-body">
 
-                        <form action="/master/product" method="POST">
+                        <form action="/master/product" method="POST" entype="multipart" enctype="multipart/form-data">
                             @csrf
 
-                            <div class="form-group">
+                            <div class="form-group mb-3">
                                 <label for="nama">Nama</label>
                                 <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama"
                                     value="{{ old('nama') }}" required>
@@ -38,7 +38,7 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group mb-3">
                                 <label for="harga">Harga</label>
                                 <input type="text" class="form-control @error('harga') is-invalid @enderror" name="harga"
                                     value="{{ old('harga') }}" required>
@@ -50,10 +50,21 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group mb-3">
+                                <label for="gambar">Gambar</label>
+                                <input type="file" class="form-control" @error('gambar') is-invalid @enderror id="gambar"
+                                    name="gambar">
+                                @error('gambar')
+                                    <div class="invalid-feedback">
+                                        {{ message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group mb-3">
                                 <label for="deskripsi">Deskripsi</label>
-                                <input type="text" class="form-control @error('deskripsi') is-invalid @enderror"
-                                    name="deskripsi" value="{{ old('deskripsi') }}" required>
+                                <input id="x" type="hidden" name="content">
+                                <trix-editor input="x"></trix-editor>
                                 <!-- error message untuk deskripsi -->
                                 @error('deskripsi')
                                     <div class="invalid-feedback">

@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreProductCategoryRequest;
-use App\Http\Requests\UpdateProductCategoryRequest;
+use Illuminate\Http\Request;
 use App\Models\ProductCategory;
 
 class ProductCategoryController extends Controller
@@ -15,7 +14,9 @@ class ProductCategoryController extends Controller
      */
     public function index()
     {
-        //
+        return view('master.product_category.index', [
+            'data' => ProductCategory::all(),
+        ]);
     }
 
     /**
@@ -25,7 +26,7 @@ class ProductCategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('master.product_category.create');
     }
 
     /**
@@ -34,9 +35,21 @@ class ProductCategoryController extends Controller
      * @param  \App\Http\Requests\StoreProductCategoryRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreProductCategoryRequest $request)
+    public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'nama' => 'required',
+        ]);
+
+
+        $data = ProductCategory::create(['nama' => $request->nama]);
+
+        if ($data) {
+            return redirect()->to('master/productcat')
+                ->with(['success', "New Categoty has been created successfully"]);
+        } else {
+            return redirect()->back()->withInput()->with(['error', "some problem occured, please try again"]);
+        }
     }
 
     /**
@@ -58,7 +71,12 @@ class ProductCategoryController extends Controller
      */
     public function edit(ProductCategory $productCategory)
     {
-        //
+        // echo '<pre>';
+        // print_r($productCategory);
+        // die;
+        return view('master.product_category.edit', [
+            'data' => $productCategory
+        ]);
     }
 
     /**
@@ -68,9 +86,25 @@ class ProductCategoryController extends Controller
      * @param  \App\Models\ProductCategory  $productCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProductCategoryRequest $request, ProductCategory $productCategory)
+    public function update(Request $request, ProductCategory $productCategory)
     {
-        //
+        $model = $request->validate($request, ['nama' => 'required|unique:product_categories']);
+        $flag = ProductCategory::where('nama', $productCategory->id)->update($model);
+
+        if ($flag) {
+            return redirect()
+                ->to('master/productcat')
+                ->with([
+                    'success' => 'New data has been created successfully'
+                ]);
+        } else {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with([
+                    'error' => 'Some problem occurred, please try again'
+                ]);
+        }
     }
 
     /**

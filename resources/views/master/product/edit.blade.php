@@ -19,7 +19,7 @@
                     </div>
                 @endif
 
-                <div class="card border-0 shadow rounded">
+                <div class="card border-1 rounded">
                     <div class="card-body">
 
                         <form action="/master/product/{{ $data->id }}" method="POST">
@@ -40,11 +40,11 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="alamat">Alamat</label>
-                                <input type="text" class="form-control @error('alamat') is-invalid @enderror" name="alamat"
-                                    value="{{ old('alamat', $data->alamat) }}" required>
-                                <!-- error message untuk alamat -->
-                                @error('alamat')
+                                <label for="kategori">Kategori</label>
+                                <input type="text" class="form-control @error('kategori') is-invalid @enderror"
+                                    name="kategori" value="{{ old('id_category', $data->id_category) }}" required>
+                                <!-- error message untuk kategori -->
+                                @error('kategori')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -52,11 +52,11 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="telp">Telp</label>
-                                <input type="text" class="form-control @error('telp') is-invalid @enderror" name="telp"
-                                    value="{{ old('telp', $data->telp) }}" required>
+                                <label for="telp">Harga</label>
+                                <input type="text" class="form-control @error('harga') is-invalid @enderror" name="harga"
+                                    value="{{ old('harga', $data->harga) }}" required>
                                 <!-- error message untuk telp -->
-                                @error('telp')
+                                @error('harga')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>

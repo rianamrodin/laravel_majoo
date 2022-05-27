@@ -2,7 +2,7 @@
 
 @section('container')
     <div class="container mt-5 mb-5">
-        <h2>Tambah Supplier</h2>
+        <h2>Tambah Pelanggan</h2>
         <div class="row">
             <div class="col-md-12">
 
@@ -19,14 +19,14 @@
                     </div>
                 @endif
 
-                <div class="card border-0 shadow rounded">
+                <div class="card border-1 rounded">
                     <div class="card-body">
 
                         <form action="/master/supplier" method="POST">
                             @csrf
 
                             <div class="form-group">
-                                <label for="nama">Nama</label>
+                                <label for="nama">Nasdfsdfma</label>
                                 <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama"
                                     value="{{ old('nama') }}" required>
 

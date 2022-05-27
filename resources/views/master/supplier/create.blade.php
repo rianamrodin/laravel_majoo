@@ -19,7 +19,7 @@
                     </div>
                 @endif
 
-                <div class="card border-0 shadow rounded">
+                <div class="card border-1 rounded">
                     <div class="card-body">
 
                         <form action="/master/supplier" method="POST">
