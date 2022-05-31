@@ -73,8 +73,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" {{ Request::is('master/productcat') ? 'active' : '' }}
-                    href="/master/productcat">
+                <a class="nav-link" {{ Request::is('master/productcategories') ? 'active' : '' }}
+                    href="/master/productcategories">
                     <span data-feather="layers" class="align-text-bottom"></span>
                     Kategori Produk
                 </a>

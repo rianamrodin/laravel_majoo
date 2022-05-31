@@ -2,7 +2,7 @@
 
 @section('container')
     <div class="container mt-5 mb-5">
-        <h2>Tambah Supplier</h2>
+        <h2>Tambah Produk</h2>
         <div class="row">
             <div class="col-md-12">
 
@@ -22,10 +22,10 @@
                 <div class="card border-1 rounded">
                     <div class="card-body">
 
-                        <form action="/master/supplier" method="POST">
+                        <form action="/master/product" method="POST" entype="multipart" enctype="multipart/form-data">
                             @csrf
 
-                            <div class="form-group">
+                            <div class="form-group mb-3">
                                 <label for="nama">Nama</label>
                                 <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama"
                                     value="{{ old('nama') }}" required>
@@ -38,24 +38,44 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group">
-                                <label for="alamat">Alamat</label>
-                                <input type="text" class="form-control @error('alamat') is-invalid @enderror" name="alamat"
-                                    value="{{ old('alamat') }}" required>
-                                <!-- error message untuk alamat -->
-                                @error('alamat')
+                            <div class="from-group mb-3">
+                                <label for="category" class="form-label">Kategori</label>
+                                <select name="category_id" class="form-select">
+                                    @foreach ($categories as $cat)
+                                        <option value="{{ $cat->id }}">{{ $cat->nama }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="harga">Harga</label>
+                                <input type="text" class="form-control @error('harga') is-invalid @enderror" name="harga"
+                                    value="{{ old('harga') }}" required>
+                                <!-- error message untuk harga -->
+                                @error('harga')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
                             </div>
 
-                            <div class="form-group">
-                                <label for="telp">Telp</label>
-                                <input type="text" class="form-control @error('telp') is-invalid @enderror" name="telp"
-                                    value="{{ old('telp') }}" required>
-                                <!-- error message untuk telp -->
-                                @error('telp')
+                            <div class="form-group mb-3">
+                                <label for="gambar">Gambar</label>
+                                <input type="file" class="form-control" @error('gambar') is-invalid @enderror id="gambar"
+                                    name="gambar">
+                                @error('gambar')
+                                    <div class="invalid-feedback">
+                                        {{ message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="deskripsi">Deskripsi</label>
+                                <input id="deskripsi" type="hidden" name="deskripsi" value="{{ old('deskripsi') }}">
+                                <trix-editor input="deskripsi"></trix-editor>
+                                <!-- error message untuk deskripsi -->
+                                @error('deskripsi')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -63,7 +83,7 @@
                             </div>
                             <div class="mt-3">
                                 <button type="submit" class="btn btn-md btn-primary">Simpan</button>
-                                <a href="/master/supplier" class="btn btn-md btn-secondary">Kembali</a>
+                                <a href="/master/product" class="btn btn-md btn-secondary">Kembali</a>
                             </div>
 
                         </form>

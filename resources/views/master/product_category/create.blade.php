@@ -2,7 +2,7 @@
 
 @section('container')
     <div class="container mt-5 mb-5">
-        <h2>Tambah Supplier</h2>
+        <h2>Tambah Kategori Produk</h2>
         <div class="row">
             <div class="col-md-12">
 
@@ -22,7 +22,7 @@
                 <div class="card border-1 rounded">
                     <div class="card-body">
 
-                        <form action="/master/supplier" method="POST">
+                        <form action="/master/productcat" method="POST">
                             @csrf
 
                             <div class="form-group">
@@ -38,32 +38,9 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group">
-                                <label for="alamat">Alamat</label>
-                                <input type="text" class="form-control @error('alamat') is-invalid @enderror" name="alamat"
-                                    value="{{ old('alamat') }}" required>
-                                <!-- error message untuk alamat -->
-                                @error('alamat')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-
-                            <div class="form-group">
-                                <label for="telp">Telp</label>
-                                <input type="text" class="form-control @error('telp') is-invalid @enderror" name="telp"
-                                    value="{{ old('telp') }}" required>
-                                <!-- error message untuk telp -->
-                                @error('telp')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
                             <div class="mt-3">
                                 <button type="submit" class="btn btn-md btn-primary">Simpan</button>
-                                <a href="/master/supplier" class="btn btn-md btn-secondary">Kembali</a>
+                                <a href="/master/productcat" class="btn btn-md btn-secondary">Kembali</a>
                             </div>
 
                         </form>

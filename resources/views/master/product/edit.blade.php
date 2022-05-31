@@ -2,7 +2,7 @@
 
 @section('container')
     <div class="container mt-5 mb-5">
-        <h2>Tambah Supplier</h2>
+        <h2>Edit Produk</h2>
         <div class="row">
             <div class="col-md-12">
 
@@ -22,13 +22,14 @@
                 <div class="card border-1 rounded">
                     <div class="card-body">
 
-                        <form action="/master/supplier" method="POST">
+                        <form action="/master/product/{{ $data->id }}" method="POST">
+                            @method('put')
                             @csrf
 
                             <div class="form-group">
                                 <label for="nama">Nama</label>
                                 <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama"
-                                    value="{{ old('nama') }}" required>
+                                    value="{{ old('nama', $data->nama) }}" required>
 
                                 <!-- error message untuk nama -->
                                 @error('nama')
@@ -39,11 +40,11 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="alamat">Alamat</label>
-                                <input type="text" class="form-control @error('alamat') is-invalid @enderror" name="alamat"
-                                    value="{{ old('alamat') }}" required>
-                                <!-- error message untuk alamat -->
-                                @error('alamat')
+                                <label for="kategori">Kategori</label>
+                                <input type="text" class="form-control @error('kategori') is-invalid @enderror"
+                                    name="kategori" value="{{ old('id_category', $data->id_category) }}" required>
+                                <!-- error message untuk kategori -->
+                                @error('kategori')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -51,11 +52,11 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="telp">Telp</label>
-                                <input type="text" class="form-control @error('telp') is-invalid @enderror" name="telp"
-                                    value="{{ old('telp') }}" required>
+                                <label for="telp">Harga</label>
+                                <input type="text" class="form-control @error('harga') is-invalid @enderror" name="harga"
+                                    value="{{ old('harga', $data->harga) }}" required>
                                 <!-- error message untuk telp -->
-                                @error('telp')
+                                @error('harga')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -63,7 +64,7 @@
                             </div>
                             <div class="mt-3">
                                 <button type="submit" class="btn btn-md btn-primary">Simpan</button>
-                                <a href="/master/supplier" class="btn btn-md btn-secondary">Kembali</a>
+                                <a href="/master/product" class="btn btn-md btn-secondary">Kembali</a>
                             </div>
 
                         </form>
