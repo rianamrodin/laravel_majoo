@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -26,7 +27,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('master.product.create');
+        return view('master.product.create', [
+            'categories' => ProductCategory::all(),
+        ]);
     }
 
     /**
@@ -40,14 +43,17 @@ class ProductController extends Controller
         $this->validate($request, [
             'nama' => 'required|unique:products',
             'harga' => 'required',
-            'gambar' => 'gambar|file|max:1024'
+            'gambar' => 'image|max:1024|mimes:png,jpg,jpeg',
         ]);
+
+        $image = $request->file('gambar');
+        $image->storeAs('public/products', $image->hashName());
 
         $data = Product::create([
             'nama' => $request->nama,
             'harga' => $request->harga,
             'deksripsi' => $request->deskripsi,
-            'gambar' => $request->gambar,
+            'gambar' => $image->hashName(),
             'id_category' => $request->id_category,
         ]);
 

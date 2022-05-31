@@ -38,6 +38,15 @@
                                 @enderror
                             </div>
 
+                            <div class="from-group mb-3">
+                                <label for="category" class="form-label">Kategori</label>
+                                <select name="category_id" class="form-select">
+                                    @foreach ($categories as $cat)
+                                        <option value="{{ $cat->id }}">{{ $cat->nama }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
                             <div class="form-group mb-3">
                                 <label for="harga">Harga</label>
                                 <input type="text" class="form-control @error('harga') is-invalid @enderror" name="harga"
@@ -63,8 +72,8 @@
 
                             <div class="form-group mb-3">
                                 <label for="deskripsi">Deskripsi</label>
-                                <input id="x" type="hidden" name="content">
-                                <trix-editor input="x"></trix-editor>
+                                <input id="deskripsi" type="hidden" name="deskripsi" value="{{ old('deskripsi') }}">
+                                <trix-editor input="deskripsi"></trix-editor>
                                 <!-- error message untuk deskripsi -->
                                 @error('deskripsi')
                                     <div class="invalid-feedback">

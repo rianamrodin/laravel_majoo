@@ -29,7 +29,9 @@
                             <td>{{ $d->nama }}</td>
                             <td>{{ $d->id_category }}</td>
                             <td>{{ $d->harga }}</td>
-                            <td>{{ $d->gambar }}</td>
+                            <td>
+                                <img src="{{ asset('storage/public/products/' . $d->gambar) }}" alt="gambar">
+                            </td>
                             <td>{{ $d->deskripsi }}</td>
                             <td class="text-left">
                                 <a href="/master/product/{{ $d->id }}/edit" class="btn btn-sm btn-primary">EDIT</a>
