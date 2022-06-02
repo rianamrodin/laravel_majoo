@@ -8,7 +8,7 @@
                 {{ session('success') }}
             </div>
         @endif
-        <a href="/master/productcat/create" class="btn btn-md btn-success mb-3 float-right">Tambah Kategori</a>
+        <a href="/master/productcategories/create" class="btn btn-md btn-success mb-3 float-right">Tambah Kategori</a>
         <div class="table-responsive">
             <table class="table table-striped table-sm">
                 <thead>

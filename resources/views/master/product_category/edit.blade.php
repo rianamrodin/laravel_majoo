@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-12">
 
-                <!-- Notifikasi menggunakan flash session data -->
+                <!-- Notifikasi menggunakan flash session productCategory -->
                 @if (session('success'))
                     <div class="alert alert-success">
                         {{ session('success') }}
@@ -22,14 +22,14 @@
                 <div class="card border-1 rounded">
                     <div class="card-body">
 
-                        <form action="/master/productcategories/{{ $data->id }}" method="POST">
+                        <form action="/master/productcategories/{{ $productCategory->id }}" method="POST">
                             @method('put')
                             @csrf
 
                             <div class="form-group">
                                 <label for="nama">Nama</label>
                                 <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama"
-                                    value="{{ old('nama', $data->nama) }}" required>
+                                    value="{{ old('nama', $productCategory->nama) }}" required>
 
                                 <!-- error message untuk nama -->
                                 @error('nama')

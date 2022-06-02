@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -17,6 +18,8 @@ class ProductController extends Controller
     {
         return view('master.product.index', [
             'data' => Product::all(),
+            'categories' => ProductCategory::all(),
+
         ]);
     }
 
@@ -52,7 +55,7 @@ class ProductController extends Controller
         $data = Product::create([
             'nama' => $request->nama,
             'harga' => $request->harga,
-            'deksripsi' => $request->deskripsi,
+            'deskripsi' => $request->deskripsi,
             'gambar' => $image->hashName(),
             'id_category' => $request->id_category,
         ]);
@@ -92,8 +95,12 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
+        // echo '<pre>';
+        // print_r($product);
+        // die;
         return view('master.product.edit', [
-            'data' => $product
+            'data' => $product,
+            'categories' => ProductCategory::all(),
         ]);
     }
 
@@ -106,27 +113,47 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        $model = $request->validate($request, [
-            'nama' => 'required|unique:products',
-            'harga' => 'required',
+        $this->validate($request, [
+            'nama'     => 'required',
+            'harga'   => 'required',
+            'deskripsi'   => 'required',
         ]);
 
-        $flag = Product::where('id', $product->id)
-            ->update($model);
+        //get data Blog by ID
+        $product = Product::findOrFail($product->id);
 
-        if ($flag) {
-            return redirect()
-                ->to('master/product')
-                ->with([
-                    'success' => 'New data has been created successfully'
-                ]);
+        if ($request->file('gambar') == "") {
+
+            $product->update([
+                'nama'     => $request->nama,
+                'harga'   => $request->harga,
+                'deskripsi'   => $request->deskripsi,
+                'id_category'   => $request->id_category,
+            ]);
         } else {
-            return redirect()
-                ->back()
-                ->withInput()
-                ->with([
-                    'error' => 'Some problem occurred, please try again'
-                ]);
+
+            //hapus old image
+            Storage::disk('public')->delete('public/products/' . $product->gambar);
+
+            //upload new gambar
+            $gambar = $request->file('gambar');
+            $gambar->storeAs('public/products', $gambar->hashName());
+
+            $product->update([
+                'gambar'     => $gambar->hashName(),
+                'nama'     => $request->nama,
+                'harga'   => $request->harga,
+                'id_category'   => $request->id_category,
+                'deskripsi'   => $request->deskripsi,
+            ]);
+        }
+
+        if ($product) {
+            //redirect dengan pesan sukses
+            return redirect()->route('product.index')->with(['success' => 'Data Berhasil Diupdate!']);
+        } else {
+            //redirect dengan pesan error
+            return redirect()->route('product.index')->with(['error' => 'Data Gagal Diupdate!']);
         }
     }
 
@@ -139,6 +166,9 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         Product::destroy($product->id);
+        if ($product->gambar) {
+            Storage::disk('public')->delete('public/products/' . $product->gambar);
+        }
         return redirect('/master/product')->with('success', 'Data Berhasil dihapus');
     }
 }

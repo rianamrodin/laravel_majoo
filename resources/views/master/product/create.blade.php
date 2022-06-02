@@ -22,7 +22,7 @@
                 <div class="card border-1 rounded">
                     <div class="card-body">
 
-                        <form action="/master/product" method="POST" entype="multipart" enctype="multipart/form-data">
+                        <form action="/master/product" method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group mb-3">
@@ -40,7 +40,7 @@
 
                             <div class="from-group mb-3">
                                 <label for="category" class="form-label">Kategori</label>
-                                <select name="category_id" class="form-select">
+                                <select name="id_category" class="form-select">
                                     @foreach ($categories as $cat)
                                         <option value="{{ $cat->id }}">{{ $cat->nama }}</option>
                                     @endforeach
@@ -100,12 +100,12 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <!-- include summernote js -->
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
     <script>
         $(document).ready(function() {
             $('#content').summernote({
                 height: 250, //set editable area's height
             });
         })
-    </script>
+    </script> --}}
 @endsection

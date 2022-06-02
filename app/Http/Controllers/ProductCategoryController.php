@@ -45,7 +45,7 @@ class ProductCategoryController extends Controller
         $data = ProductCategory::create(['nama' => $request->nama]);
 
         if ($data) {
-            return redirect()->to('master/productcat')
+            return redirect()->to('master/productcategories')
                 ->with(['success', "New Categoty has been created successfully"]);
         } else {
             return redirect()->back()->withInput()->with(['error', "some problem occured, please try again"]);
@@ -71,12 +71,8 @@ class ProductCategoryController extends Controller
      */
     public function edit(ProductCategory $productCategory)
     {
-        // echo '<pre>';
-        // print_r($productCategory);
-        // die;
-        return view('master.product_category.edit', [
-            'data' => $productCategory
-        ]);
+
+        return view('master.product_category.edit', compact('productCategory'));
     }
 
     /**
@@ -115,6 +111,8 @@ class ProductCategoryController extends Controller
      */
     public function destroy(ProductCategory $productCategory)
     {
-        //
+        ProductCategory::destroy($productCategory->id);
+
+        return redirect('/master/productcategories')->with('success', 'Data Berhasil dihapus');
     }
 }

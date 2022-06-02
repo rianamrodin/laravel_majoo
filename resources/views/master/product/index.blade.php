@@ -24,15 +24,21 @@
                 </thead>
                 <tbody>
                     @foreach ($data as $d)
+                        <?php
+                        // echo '<pre>';
+                        // print_r($d->category);
+                        // die();
+                        ?>
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $d->nama }}</td>
-                            <td>{{ $d->id_category }}</td>
+                            <td>{{ $d->category->nama }}</td>
                             <td>{{ $d->harga }}</td>
-                            <td>
-                                <img src="{{ asset('storage/public/products/' . $d->gambar) }}" alt="gambar">
+                            <td class="text-center">
+                                <img src="{{ asset('storage/public/products/' . $d->gambar) }}" alt="gambar"
+                                    class="rounded" style="width:150px">
                             </td>
-                            <td>{{ $d->deskripsi }}</td>
+                            <td>{{ Str::limit(strip_tags($d->deskripsi), 25, '...') }}</td>
                             <td class="text-left">
                                 <a href="/master/product/{{ $d->id }}/edit" class="btn btn-sm btn-primary">EDIT</a>
                                 <form onsubmit="return confirm('Apakah Anda Yakin ?');"
